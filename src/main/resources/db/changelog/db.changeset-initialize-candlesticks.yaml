@@ -1,0 +1,62 @@
+databaseChangeLog:
+    - changeSet:
+        id: 1-1
+        author: mumukiller
+        changes:
+            - createTable:
+                tableName: candlesticks
+                columns:
+                    - column:
+                        name: code
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: name
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: tool
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: open_price
+                        type: bigint
+                    - column:
+                        name: high_price
+                        type: bigint
+                    - column:
+                        name: low_price
+                        type: bigint
+                    - column:
+                        name: close_price
+                        type: bigint
+                    - column:
+                        name: datetime
+                        type: datetime
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: body_type
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: trend_direction
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+
+    - changeSet:
+        id: 1-2
+        author: mumukiller
+        changes:
+        - addUniqueConstraint:
+            columnNames: code, datetime
+            constraintName: uq_candlesticks
+            deferrable: true
+            initiallyDeferred: true
+            schemaName: public
+            tableName: candlesticks

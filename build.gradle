@@ -1,0 +1,91 @@
+group 'com.mumukiller'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.0.M2'
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.9")
+        classpath("io.franzbecker:gradle-lombok:1.8")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+apply plugin: 'com.ewerk.gradle.plugins.querydsl'
+apply plugin: 'io.franzbecker.gradle-lombok'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spring.io/snapshot" }
+    maven { url "https://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-webflux')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    compile('com.google.guava:guava:22.0')
+
+    compile('org.apache.logging.log4j:log4j-api')
+    compile('org.apache.logging.log4j:log4j-core')
+
+    compile('org.liquibase:liquibase-core:3.5.3')
+
+    compile('io.reactivex:rxjava:1.3.0')
+    compile('com.twilio.sdk:twilio:7.11.+')
+
+    compile('org.postgresql:postgresql:9.4-1202-jdbc42')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("junit:junit:4.12")
+    testCompile("com.h2database:h2:1.4.196")
+
+
+    compileOnly "org.projectlombok:lombok:1.16.16"
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "$buildDir/generated-sources/apt"
+        }
+    }
+}
+
+querydsl {
+    querydslSourcesDir = "$buildDir/generated-sources/apt"
+    jpa = true
+}
+
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+
+
+
+
+
+

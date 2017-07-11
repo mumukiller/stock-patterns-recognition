@@ -1,0 +1,53 @@
+databaseChangeLog:
+    - changeSet:
+        id: 2
+        author: mumukiller
+        changes:
+            - createTable:
+                tableName: realtime_samples
+                columns:
+                    - column:
+                        name: code
+                        type: varchar(255)
+                        constraints:
+                            primaryKey: true
+                            nullable: false
+                    - column:
+                        name: name
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: tool
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: trading_status
+                        type: varchar(255)
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: open_price
+                        type: bigint
+                    - column:
+                        name: high_price
+                        type: bigint
+                    - column:
+                        name: low_price
+                        type: bigint
+                    - column:
+                        name: close_price
+                        type: bigint
+                    - column:
+                        name: buy_price
+                        type: bigint
+                    - column:
+                        name: sell_price
+                        type: bigint
+                    - column:
+                        name: date
+                        type: date
+                    - column:
+                        name: time
+                        type: time
